@@ -42,10 +42,9 @@ def getTimeStamp(line):
 	# Returning minutes of timedelta from NOW to request time
 	# Should only keep requests within 3-4 days of script to make sure its relevant
 
-	#DEBUG
-	#print ret[0]
-
 	return ret[0]
+
+#####################################################################
 
 def getReqPair(line):
 	# split up line
@@ -68,7 +67,7 @@ def getReqPair(line):
 
 ################################################################
 
-# Cut off requests from list that are past last shopping shift
+# Cut off requests from list that are past last shopping shift or too long
 def removeRequest(list):
 	# wed = 4320 ... sun = 5760
 	if shift == 'wed':
@@ -88,14 +87,15 @@ def removeRequest(list):
 			#remove one from size of list
 			idx_max -= 1
 			#dont increment
+		elif len(list[i][1]) > 22:
+			#remove old requests
+			list.pop(i)
+			#remove one from size of list
+			idx_max -= 1
+			#dont increment
+
 		else:
 			i += 1
-
-
-
-
-
-
 
 #################################################################
 
@@ -112,14 +112,7 @@ def populateList(file):
 
 		LIST.append( (tmp_time,tmp_req,tmp_fav) )
 
-
-
 ##################################################################
-
-
-
-
-
 
 if __name__ == "__main__":
 	populateList(chat)
@@ -130,31 +123,3 @@ if __name__ == "__main__":
 	#DEBUG
 	for i in LIST:
 		print i
-
-
-
-
-
-
-"""
-# Find third comma and split string, remove extraneous shit
-reqp = content[0].split(',',3)
-reqp.pop(0)
-reqp.pop(0)
-reqp.pop(0)
-
-reqt = (reqp[0].rsplit(',',1))[0]
-reqt = reqt.strip('\"')
-reqf = (reqp[0].rsplit(',',1))[1]
-reqf = reqf.replace('\n','')
-reqf = int(reqf)
-#print reqt
-#print reqf
-
-reqpairs.append((reqt,reqf))
-print reqpairs[0]
-"""
-
-
-# get the timestamp (date/time) for a request 
-
