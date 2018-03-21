@@ -119,6 +119,7 @@ if __name__ == "__main__":
 
 	# At this point, LIST is full of tuples
 	removeRequest(LIST)
+	LIST.sort(key=lambda x: x[1])
 
 	#DEBUG
 	for i in LIST:
