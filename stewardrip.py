@@ -118,8 +118,10 @@ if __name__ == "__main__":
 	populateList(chat)
 
 	# At this point, LIST is full of tuples
+	# Remove old and too long requests
 	removeRequest(LIST)
-	LIST.sort(key=lambda x: x[1])
+	# sort by favorites
+	LIST.sort(key=lambda x: x[2], reverse=True)
 
 	#DEBUG
 	for i in LIST:
