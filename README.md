@@ -9,5 +9,5 @@ Collection of scripts/software related to Chi Phi Steward
 # TO DO
 1. If there are multiple entries of the same thing
 	a. Add them together (ie. yogurt + yogurt = 2 favorites on yogurt)
-	b. Need something to check for small typos or very similar things (ie. greek yogurt = yogurt.... yogrut = yogurt)
 2. Create a database of known foods and requests etc. (Not sure how useful this will be, need to evaluate)
+3. Fuzzy string recognition... possibly an open-source solution for this
