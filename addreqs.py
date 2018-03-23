@@ -50,6 +50,7 @@ def checkDup(filename, item):
 
     if len(content) == 0:
         fileAdd(filename,item)
+        return
     else:
         for i in content:
             '''
@@ -71,35 +72,44 @@ def checkDup(filename, item):
             # Close Match? 
             elif fuzz.ratio(i,item) >= 85:
                 print "Request may already exist as \"" + i + "\", continue? (y/n)"
-                if raw_input("r: ") == 'y':
+                res = raw_input('r: ')
+
+                if res == 'y':
+                    print "close match, y"
                     reject = False
                     continue
-                elif raw_input("r: ") == 'n':
+                elif res == 'n':
+                    print "close match, n"
                     reject = True
                     print "Rejected request\n"
-                    continue
+                    break
                 else:
-                    print "Invalid response, try again\n"
+                    print "close, else"
 
             # Partial Match? 
             elif (fuzz.ratio(i,item) < 85) and (fuzz.partial_ratio(i,item) > 85):
                 print "Request is similar to another: \"" + i + "\", continue ? (y/n)"
-                if raw_input() == "y":
+                res = raw_input('r: ')
+                if res == "y":
+                    print "part match, y"
                     reject = False
                     continue
-                elif raw_input() == "n":
+                elif res == "n":
+                    print "part match, n"
                     reject = True
                     print "Rejected request\n"
-                    continue
+                    break
                 else:
-                    print "Invalid response, try again\n"
+                    print "part, else"
 
             else:
+                print "else, continuing"
                 continue
 
-            # If item is not a duplicate, typo, or similar match, add it
-            if reject == False:
-                fileAdd(filename, item)
+    # If item is not a duplicate, typo, or similar match, add it
+    if reject == False:
+        print "Added ",item
+        fileAdd(filename, item)
 
 ################################################################################
 
@@ -111,10 +121,10 @@ def fileAdd(filename, item):
 
 if __name__ == "__main__":
     # Prompt
-    print '***************************************************'
+    print '\n***************************************************'
     print 'THIS SCRIPT ALLOWS YOU TO ADD ITEMS TO THE DATABASE'
     print '             TYPE \"exit\" to terminate'
-    print '***************************************************'
+    print '***************************************************\n'
 
     while True:
         req = raw_input("request: ")
