@@ -120,6 +120,7 @@ if __name__ == "__main__":
 	# At this point, LIST is full of tuples
 	# Remove old and too long requests
 	removeRequest(LIST)
+	
 	# sort by favorites
 	LIST.sort(key=lambda x: x[2], reverse=True)
 
